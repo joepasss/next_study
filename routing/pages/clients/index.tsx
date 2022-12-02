@@ -14,7 +14,14 @@ const ClientsPage = () => {
       <ul>
         {clients.map((item, index) => (
           <li key={`clients_link--${index}`}>
-            <Link href={`/clients/${item.id}`}>{item.name}</Link>
+            <Link
+              href={{
+                pathname: "/clients/[id]",
+                query: { id: item.id },
+              }}
+            >
+              {item.name}
+            </Link>
           </li>
         ))}
       </ul>
