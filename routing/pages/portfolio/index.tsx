@@ -1,12 +1,18 @@
+import Link from "next/link";
 import React from "react";
 
 const PortfolioPage = () => {
   return (
     <div>
       <h1>The Portfolio Page</h1>
-      <a href="/">HOME</a>
-      <br />
-      <a href="/portfolio/list">LIST</a>
+      <ul>
+        <li>
+          <Link href={"/"}>Home</Link>
+        </li>
+        <li>
+          <Link href={"/portfolio/list"}>List</Link>
+        </li>
+      </ul>
     </div>
   );
 };
