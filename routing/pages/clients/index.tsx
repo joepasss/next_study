@@ -3,8 +3,8 @@ import React from "react";
 
 const ClientsPage = () => {
   const clients = [
-    { id: "max", name: "Maximilian" },
-    { id: "manu", name: "Manuel" },
+    { id: "joe", name: "Joe Pass" },
+    { id: "tom", name: "Tom Jobim" },
   ];
 
   return (
@@ -12,15 +12,15 @@ const ClientsPage = () => {
       <h1>The Clients Page</h1>
 
       <ul>
-        {clients.map((item, index) => (
-          <li key={`clients_link--${index}`}>
+        {clients.map((client, index) => (
+          <li key={`clients_link--${client.id}__${index}`}>
             <Link
               href={{
                 pathname: "/clients/[id]",
-                query: { id: item.id },
+                query: { id: client.id },
               }}
             >
-              {item.name}
+              {client.name}
             </Link>
           </li>
         ))}
