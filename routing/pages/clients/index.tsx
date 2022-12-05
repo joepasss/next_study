@@ -2,17 +2,28 @@ import Link from "next/link";
 import React from "react";
 
 const ClientsPage = () => {
+  const clients = [
+    { id: "joe", name: "Joe Pass" },
+    { id: "tom", name: "Tom Jobim" },
+  ];
+
   return (
     <div>
       <h1>The Clients Page</h1>
 
       <ul>
-        <li>
-          <Link href={"/"}>Home</Link>
-        </li>
-        <li>
-          <Link href={"/clients/123"}>Client/id</Link>
-        </li>
+        {clients.map((client, index) => (
+          <li key={`clients_link--${client.id}__${index}`}>
+            <Link
+              href={{
+                pathname: "/clients/[id]",
+                query: { id: client.id },
+              }}
+            >
+              {client.name}
+            </Link>
+          </li>
+        ))}
       </ul>
     </div>
   );
