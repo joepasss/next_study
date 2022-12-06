@@ -1,13 +1,14 @@
 export interface DummyEventsInterface {
   id: string;
   title: string;
+  location: string;
   description: string;
   date: string;
   image: string;
   isFeatured: boolean;
 }
 
-const DUMMY_EVENTS = [
+const DUMMY_EVENTS: DummyEventsInterface[] = [
   {
     id: "e1",
     title: "Programming for everyone",
