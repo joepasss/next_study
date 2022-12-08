@@ -1,7 +1,8 @@
 /* eslint-disable @next/next/no-img-element */
-import Link from "next/link";
 import React, { FC } from "react";
 import { DummyEventsInterface } from "../../dummy-data";
+import Button from "../ui/Button";
+import { AddressIcon, ArrowRightIcon, DateIcon } from "../icons";
 
 interface Props {
   item: DummyEventsInterface;
@@ -29,15 +30,22 @@ const EventItem: FC<Props> = ({ item }) => {
         </div>
 
         <div className="event-item__content--date">
+          <DateIcon />
           <time>{readableDate}</time>
         </div>
 
         <div className="event-item__content--address">
+          <AddressIcon />
           <address>{formattedAddr}</address>
         </div>
 
         <div className="event-item__content--actions">
-          <Link href={exploreLink}>Explore Event</Link>
+          <Button link={exploreLink}>
+            <span>Explore Event</span>
+            <span className="icon">
+              <ArrowRightIcon />
+            </span>
+          </Button>
         </div>
       </div>
     </li>
