@@ -1,5 +1,4 @@
 /* eslint-disable @next/next/no-img-element */
-import Image from "next/image";
 import Link from "next/link";
 import React, { FC } from "react";
 import { DummyEventsInterface } from "../../dummy-data";
@@ -9,22 +8,24 @@ interface Props {
 }
 
 const EventItem: FC<Props> = ({ item }) => {
-  const readableDate = new Date(item.date).toLocaleDateString("en-US", {
+  const { id, title, description, location, date, image, isFeatured } = item;
+
+  const readableDate = new Date(date).toLocaleDateString("en-US", {
     day: "numeric",
     month: "long",
     year: "numeric",
   });
 
-  const formattedAddr = item.location.replace(", ", "\n");
-  const exploreLink = `/events/${item.id}`;
+  const formattedAddr = location.replace(", ", "\n");
+  const exploreLink = `/events/${id}`;
 
   return (
     <li>
-      <img src={"/" + item.image} alt="" />
+      <img src={"/" + image} alt="items" />
 
       <div>
         <div>
-          <h2>{item.title}</h2>
+          <h2>{title}</h2>
         </div>
 
         <div>

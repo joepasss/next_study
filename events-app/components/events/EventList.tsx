@@ -10,7 +10,7 @@ const EventList: FC<Props> = ({ items }) => {
   return (
     <ul>
       {items.map((event, index) => (
-        <EventItem key={`event-list__${index}`} item={event} />
+        <EventItem key={`event-item__${event.id}--${index}`} item={event} />
       ))}
     </ul>
   );
