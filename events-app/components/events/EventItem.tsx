@@ -2,6 +2,8 @@
 import Link from "next/link";
 import React, { FC } from "react";
 import { DummyEventsInterface } from "../../dummy-data";
+import { AddressIcon, ArrowRightIcon, DateIcon } from "../icons";
+import Button from "../ui/Button";
 
 interface Props {
   item: DummyEventsInterface;
@@ -17,7 +19,7 @@ const EventItem: FC<Props> = ({ item }) => {
   });
 
   const formattedAddr = location.replace(", ", "\n");
-  const exploreLink = `/events/${id}`;
+  const exploreLink = { pathname: "/events/[id]", query: { id } };
 
   return (
     <li className="event-item">
@@ -29,15 +31,22 @@ const EventItem: FC<Props> = ({ item }) => {
         </div>
 
         <div className="event-item__content--date">
+          <DateIcon />
           <time>{readableDate}</time>
         </div>
 
         <div className="event-item__content--address">
+          <AddressIcon />
           <address>{formattedAddr}</address>
         </div>
 
         <div className="event-item__content--actions">
-          <Link href={exploreLink}>Explore Event</Link>
+          <Button link={exploreLink}>
+            <span>Explore Event</span>
+            <span className="icon">
+              <ArrowRightIcon />
+            </span>
+          </Button>
         </div>
       </div>
     </li>
