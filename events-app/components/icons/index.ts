@@ -1,5 +1,5 @@
-import DateIcon from "./date-icon";
-import ArrowRightIcon from "./arrow-right-icon";
-import AddressIcon from "./address-icon";
+import AddressIcon from "./AddressIcon";
+import ArrowRightIcon from "./ArrowRightIcon";
+import DateIcon from "./DateIcon";
 
-export { DateIcon, ArrowRightIcon, AddressIcon };
+export { AddressIcon, ArrowRightIcon, DateIcon };

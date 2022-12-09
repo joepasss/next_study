@@ -1,8 +1,8 @@
 /* eslint-disable @next/next/no-img-element */
 import React, { FC } from "react";
 import { DummyEventsInterface } from "../../dummy-data";
-import Button from "../ui/Button";
 import { AddressIcon, ArrowRightIcon, DateIcon } from "../icons";
+import Button from "../ui/Button";
 
 interface Props {
   item: DummyEventsInterface;
@@ -18,7 +18,7 @@ const EventItem: FC<Props> = ({ item }) => {
   });
 
   const formattedAddr = location.replace(", ", "\n");
-  const exploreLink = `/events/${id}`;
+  const exploreLink = { pathname: "/events/[id]", query: { id } };
 
   return (
     <li className="event-item">

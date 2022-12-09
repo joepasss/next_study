@@ -1,8 +1,9 @@
+import { FC, ReactNode } from "react";
 import Link from "next/link";
-import React, { FC, ReactNode } from "react";
+import { UrlObject } from "url";
 
 interface Props {
-  link: string;
+  link: UrlObject;
   children: ReactNode;
 }
 
