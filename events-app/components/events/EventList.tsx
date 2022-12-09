@@ -8,7 +8,7 @@ interface Props {
 
 const EventList: FC<Props> = ({ items }) => {
   return (
-    <ul>
+    <ul className="event-list">
       {items.map((event, index) => (
         <EventItem key={`event-item__${event.id}--${index}`} item={event} />
       ))}

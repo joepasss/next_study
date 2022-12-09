@@ -20,23 +20,23 @@ const EventItem: FC<Props> = ({ item }) => {
   const exploreLink = `/events/${id}`;
 
   return (
-    <li>
+    <li className="event-item">
       <img src={"/" + image} alt="items" />
 
-      <div>
-        <div>
+      <div className="event-item__content">
+        <div className="event-item__content--summary">
           <h2>{title}</h2>
         </div>
 
-        <div>
+        <div className="event-item__content--date">
           <time>{readableDate}</time>
         </div>
 
-        <div>
+        <div className="event-item__content--address">
           <address>{formattedAddr}</address>
         </div>
 
-        <div>
+        <div className="event-item__content--actions">
           <Link href={exploreLink}>Explore Event</Link>
         </div>
       </div>
