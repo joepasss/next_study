@@ -13,13 +13,13 @@ const EventDetailPage = () => {
   const event = getEventById(eventId as string);
 
   if (!event) {
-    return <p>No event found!</p>;
+    return <p>No event Found!</p>;
   }
 
   return (
     <Fragment>
       <EventSummary title={event.title} />
-      <EventLogistics item={event} imageAlt={event.title} />
+      <EventLogistics item={event} />
       <EventContent>
         <p>{event.description}</p>
       </EventContent>

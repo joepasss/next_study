@@ -1,17 +1,16 @@
-import classes from "./event-summary.module.css";
+import { FC } from "react";
+import { DummyEventsInterface } from "../../dummy-data";
 
 interface Props {
-  title: String;
+  title: DummyEventsInterface["title"];
 }
 
-function EventSummary(props: Props) {
-  const { title } = props;
-
+const EventSummary: FC<Props> = ({ title }) => {
   return (
-    <section className="event-detail__summary">
+    <div className="event-summary">
       <h1>{title}</h1>
-    </section>
+    </div>
   );
-}
+};
 
 export default EventSummary;
