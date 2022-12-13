@@ -3,15 +3,24 @@ import Link from "next/link";
 import { UrlObject } from "url";
 
 interface Props {
-  link: UrlObject;
+  link?: UrlObject;
   children: ReactNode;
+  onClick?: void;
 }
 
-const Button: FC<Props> = ({ link, children }) => {
+const Button: FC<Props> = ({ link, children, onClick }) => {
+  if (link) {
+    return (
+      <Link href={link} className="btn">
+        {children}
+      </Link>
+    );
+  }
+
   return (
-    <Link href={link} className="btn">
+    <button className="btn" onClick={onClick!}>
       {children}
-    </Link>
+    </button>
   );
 };
 
