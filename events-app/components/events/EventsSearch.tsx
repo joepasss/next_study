@@ -1,15 +1,29 @@
-import React, { FC } from "react";
+import React, { FC, FormEvent, RefObject, useRef } from "react";
 import Button from "../ui/Button";
 
-interface Props {}
+interface Props {
+  onSearch: (selectedYear: string, selectedMonth: string) => void;
+}
 
-const EventsSearch: FC<Props> = () => {
+const EventsSearch: FC<Props> = ({ onSearch }) => {
+  const yearInputRef = useRef() as RefObject<HTMLSelectElement>;
+  const monthInputRef = useRef() as RefObject<HTMLSelectElement>;
+
+  const submitHandler = (event: FormEvent) => {
+    event.preventDefault();
+
+    const selectedYear = yearInputRef.current!.value;
+    const selectedMonth = monthInputRef.current!.value;
+
+    onSearch(selectedYear, selectedMonth);
+  };
+
   return (
-    <form className="form">
+    <form className="form" onSubmit={submitHandler}>
       <div className="form__controls">
         <div className="form__controls--control">
           <label htmlFor="year">Year</label>
-          <select name="year" id="year">
+          <select name="year" id="year" ref={yearInputRef}>
             <option value="2021">2021</option>
             <option value="2022">2022</option>
           </select>
@@ -17,7 +31,7 @@ const EventsSearch: FC<Props> = () => {
 
         <div className="form__controls--control">
           <label htmlFor="month">Month</label>
-          <select name="month" id="month">
+          <select name="month" id="month" ref={monthInputRef}>
             <option value="1">January</option>
             <option value="2">February</option>
             <option value="3">March</option>
