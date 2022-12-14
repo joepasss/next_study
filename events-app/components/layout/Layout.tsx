@@ -1,4 +1,4 @@
-import React, { FC, Fragment, ReactNode } from "react";
+import { FC, Fragment, ReactNode } from "react";
 import MainHeader from "./MainHeader";
 
 interface Props {

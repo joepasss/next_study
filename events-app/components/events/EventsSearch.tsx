@@ -1,21 +1,25 @@
-import React, { FC, FormEvent, RefObject, useRef } from "react";
+import { useRouter } from "next/router";
+import React, { FormEvent, RefObject, useRef } from "react";
 import Button from "../ui/Button";
 
-interface Props {
-  onSearch: (selectedYear: string, selectedMonth: string) => void;
-}
+const EventsSearch = () => {
+  const router = useRouter();
 
-const EventsSearch: FC<Props> = ({ onSearch }) => {
   const yearInputRef = useRef() as RefObject<HTMLSelectElement>;
   const monthInputRef = useRef() as RefObject<HTMLSelectElement>;
 
-  const submitHandler = (event: FormEvent) => {
-    event.preventDefault();
+  const findEventHandler = (year: string, month: string) => {
+    const fullPath = `/events/${year}/${month}`;
+    router.push(fullPath);
+  };
+
+  const submitHandler = (events: FormEvent) => {
+    events.preventDefault();
 
     const selectedYear = yearInputRef.current!.value;
     const selectedMonth = monthInputRef.current!.value;
 
-    onSearch(selectedYear, selectedMonth);
+    findEventHandler(selectedYear, selectedMonth);
   };
 
   return (

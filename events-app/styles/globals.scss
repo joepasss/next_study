@@ -61,4 +61,11 @@ ul {
   }
 }
 
+a {
+  text-decoration: none;
+  cursor: pointer;
+  font: inherit;
+  color: #dafff7;
+}
+
 @import "./components/components";

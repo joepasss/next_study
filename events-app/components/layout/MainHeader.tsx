@@ -1,5 +1,4 @@
 import Link from "next/link";
-import React from "react";
 
 const MainHeader = () => {
   return (
@@ -7,6 +6,7 @@ const MainHeader = () => {
       <div className="logo">
         <Link href={"/"}>NextEvents</Link>
       </div>
+
       <nav className="navigation">
         <ul>
           <li>
