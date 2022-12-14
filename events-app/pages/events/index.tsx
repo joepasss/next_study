@@ -1,10 +1,14 @@
-import React from "react";
+import React, { Fragment } from "react";
+import EventList from "../../components/events/EventList";
+import { getAllEvents } from "../../dummy-data";
 
 const AllEventsPage = () => {
+  const events = getAllEvents();
+
   return (
-    <div>
-      <h1>All Events</h1>
-    </div>
+    <Fragment>
+      <EventList items={events} />
+    </Fragment>
   );
 };
 
