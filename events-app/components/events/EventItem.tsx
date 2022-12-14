@@ -41,11 +41,13 @@ const EventItem: FC<Props> = ({ item }) => {
         </div>
 
         <div className="event-item__content--actions">
-          <Button link={exploreLink}>
-            <span>Explore Event</span>
-            <span className="icon">
-              <ArrowRightIcon />
-            </span>
+          <Button>
+            <Link href={exploreLink}>
+              <span>Explore Event</span>
+              <span className="icon">
+                <ArrowRightIcon />
+              </span>
+            </Link>
           </Button>
         </div>
       </div>
