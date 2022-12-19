@@ -1,3 +1,5 @@
+import path from "path";
+import fs from "fs/promises";
 import { GetServerSideProps, GetServerSidePropsResult } from "next";
 
 export default function Home(props: DataInterface) {
@@ -22,9 +24,13 @@ interface DataInterface {
 export const getStaticProps: GetServerSideProps = async (): Promise<
   GetServerSidePropsResult<DataInterface>
 > => {
+  const filePath = path.join(process.cwd(), "data", "dummy-backend.json");
+  const jsonData = (await fs.readFile(filePath)).toString();
+  const data = JSON.parse(jsonData);
+
   return {
     props: {
-      products: [{ id: "p1", title: "Product1" }],
+      products: data.products,
     },
   };
 };
