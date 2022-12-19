@@ -1,16 +1,12 @@
-import {
-  GetServerSideProps,
-  GetServerSidePropsContext,
-  GetServerSidePropsResult,
-} from "next";
+import { GetServerSideProps, GetServerSidePropsResult } from "next";
 
 export default function Home(props: DataInterface) {
   const { products } = props;
 
   return (
     <ul>
-      {products.map((product) => (
-        <li key={product.id}>{product.title}</li>
+      {products.map((product, index) => (
+        <li key={`${product.id}_${index}`}>{product.title}</li>
       ))}
     </ul>
   );
