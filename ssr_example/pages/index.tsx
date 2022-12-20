@@ -1,6 +1,6 @@
-import path from "path";
+import { GetStaticProps, GetStaticPropsResult } from "next";
 import fs from "fs/promises";
-import { GetServerSideProps, GetStaticPropsResult } from "next";
+import path from "path";
 
 export default function Home(props: DataInterface) {
   const { products } = props;
@@ -21,7 +21,7 @@ interface DataInterface {
   }[];
 }
 
-export const getStaticProps: GetServerSideProps = async (): Promise<
+export const getStaticProps: GetStaticProps = async (): Promise<
   GetStaticPropsResult<DataInterface>
 > => {
   const filePath = path.join(process.cwd(), "data", "dummy-backend.json");
