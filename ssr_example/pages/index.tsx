@@ -21,12 +21,25 @@ interface DataInterface {
   }[];
 }
 
-export const getStaticProps: GetStaticProps = async (): Promise<
-  GetStaticPropsResult<DataInterface>
-> => {
+export const getStaticProps: GetStaticProps = async (
+  context
+): Promise<GetStaticPropsResult<DataInterface>> => {
   const filePath = path.join(process.cwd(), "data", "dummy-backend.json");
   const jsonData = (await fs.readFile(filePath)).toString();
   const data = JSON.parse(jsonData);
+
+  if (!data) {
+    return {
+      redirect: {
+        permanent: true,
+        destination: "/no-data",
+      },
+    };
+  }
+
+  if (data.products.length === 0) {
+    return { notFound: true };
+  }
 
   return {
     props: {
