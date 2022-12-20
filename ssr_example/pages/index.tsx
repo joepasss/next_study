@@ -1,6 +1,7 @@
 import { GetStaticProps, GetStaticPropsResult } from "next";
 import fs from "fs/promises";
 import path from "path";
+import Link from "next/link";
 
 export default function Home(props: DataInterface) {
   const { products } = props;
@@ -8,16 +9,19 @@ export default function Home(props: DataInterface) {
   return (
     <ul>
       {products.map((product, index) => (
-        <li key={`${product.id}_${index}`}>{product.title}</li>
+        <li key={`${product.id}_${index}`}>
+          <Link href={`/${product.id}`}>{product.title}</Link>
+        </li>
       ))}
     </ul>
   );
 }
 
-interface DataInterface {
+export interface DataInterface {
   products: {
     id: string;
     title: string;
+    description: string;
   }[];
 }
 
