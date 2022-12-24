@@ -16,6 +16,10 @@ interface Props {
 }
 
 const ProductDetailPage: NextPage<Props> = ({ loadedProduct }) => {
+  if (!loadedProduct) {
+    return <p>Loading ...</p>;
+  }
+
   return (
     <Fragment>
       <h1>{loadedProduct.title}</h1>
@@ -58,12 +62,8 @@ export const getStaticProps: GetStaticProps = async (
 export const getStaticPaths: GetStaticPaths =
   async (): Promise<GetStaticPathsResult> => {
     return {
-      paths: [
-        { params: { pid: "p1" } },
-        { params: { pid: "p2" } },
-        { params: { pid: "p3" } },
-      ],
-      fallback: false,
+      paths: [{ params: { pid: "p1" } }],
+      fallback: true,
     };
   };
 
