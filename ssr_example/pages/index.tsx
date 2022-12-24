@@ -1,6 +1,7 @@
 import { GetStaticProps, GetStaticPropsResult } from "next";
 import fs from "fs/promises";
 import path from "path";
+import { DataInterface } from "../interfaces/Data";
 import Link from "next/link";
 
 export default function Home(props: DataInterface) {
@@ -17,20 +18,25 @@ export default function Home(props: DataInterface) {
   );
 }
 
-export interface DataInterface {
-  products: {
-    id: string;
-    title: string;
-    description: string;
-  }[];
-}
-
-export const getStaticProps: GetStaticProps = async (
-  context
-): Promise<GetStaticPropsResult<DataInterface>> => {
+export const getStaticProps: GetStaticProps = async (): Promise<
+  GetStaticPropsResult<DataInterface>
+> => {
   const filePath = path.join(process.cwd(), "data", "dummy-backend.json");
   const jsonData = (await fs.readFile(filePath)).toString();
-  const data = JSON.parse(jsonData);
+  const data: DataInterface = JSON.parse(jsonData);
+
+  if (!data) {
+    return {
+      redirect: {
+        permanent: false,
+        destination: "/no-data",
+      },
+    };
+  }
+
+  if (data.products.length === 0) {
+    return { notFound: true };
+  }
 
   if (!data) {
     return {

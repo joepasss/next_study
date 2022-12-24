@@ -7,12 +7,12 @@ import {
 } from "next";
 import path from "path";
 import fs from "fs/promises";
-import { Fragment } from "react";
-import { DataInterface } from ".";
+import React, { Fragment } from "react";
+import { DataInterface } from "../interfaces/Data";
+import { ExtractArrayType } from "../interfaces/UtilityType";
 
-type FilterArray<T> = T extends (infer U)[] ? U : T;
 interface Props {
-  loadedProduct: FilterArray<DataInterface["products"]>;
+  loadedProduct: ExtractArrayType<DataInterface["products"]>;
 }
 
 const ProductDetailPage: NextPage<Props> = ({ loadedProduct }) => {
@@ -37,12 +37,16 @@ export const getStaticProps: GetStaticProps = async (
 
   const filePath = path.join(process.cwd(), "data", "dummy-backend.json");
   const jsonData = (await fs.readFile(filePath)).toString();
-  const data = JSON.parse(jsonData);
+  const data: DataInterface = JSON.parse(jsonData);
 
   const product = data.products.find(
-    (product: FilterArray<DataInterface["products"]>) =>
+    (product: ExtractArrayType<DataInterface["products"]>) =>
       product.id === productId
   );
+
+  if (product == undefined) {
+    return { notFound: true };
+  }
 
   return {
     props: {
