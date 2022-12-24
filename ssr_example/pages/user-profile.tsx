@@ -23,6 +23,8 @@ const UserProfilePage: NextPage<Props> = (props) => {
 export const getServerSideProps: GetServerSideProps = async (
   context: GetServerSidePropsContext
 ): Promise<GetServerSidePropsResult<Props>> => {
+  const { params, req, res } = context;
+
   return {
     props: {
       username: "joe",
