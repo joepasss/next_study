@@ -16,6 +16,10 @@ interface Props {
 }
 
 const ProductDetailPage: NextPage<Props> = ({ loadedProduct }) => {
+  if (!loadedProduct) {
+    return <p>Loading ...</p>;
+  }
+
   return (
     <Fragment>
       <h1>{loadedProduct.title}</h1>
@@ -50,7 +54,7 @@ export const getStaticProps: GetStaticProps = async (
       product.id === productId
   );
 
-  if (product == undefined) {
+  if (!product) {
     return { notFound: true };
   }
 
@@ -71,7 +75,7 @@ export const getStaticPaths: GetStaticPaths =
 
     return {
       paths: pathsWithParams,
-      fallback: false,
+      fallback: true,
     };
   };
 
