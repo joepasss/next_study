@@ -24,6 +24,14 @@ const ProductDetailPage: NextPage<Props> = ({ loadedProduct }) => {
   );
 };
 
+const getData = async () => {
+  const filePath = path.join(process.cwd(), "data", "dummy-backend.json");
+  const jsonData = (await fs.readFile(filePath)).toString();
+  const data: DataInterface = JSON.parse(jsonData);
+
+  return data;
+};
+
 export const getStaticProps: GetStaticProps = async (
   context
 ): Promise<GetStaticPropsResult<Props>> => {
@@ -32,12 +40,8 @@ export const getStaticProps: GetStaticProps = async (
   if (params === undefined) {
     return { notFound: true };
   }
-
   const productId = params.pid;
-
-  const filePath = path.join(process.cwd(), "data", "dummy-backend.json");
-  const jsonData = (await fs.readFile(filePath)).toString();
-  const data: DataInterface = JSON.parse(jsonData);
+  const data = await getData();
 
   const product = data.products.find(
     (product: ExtractArrayType<DataInterface["products"]>) =>
@@ -57,13 +61,13 @@ export const getStaticProps: GetStaticProps = async (
 
 export const getStaticPaths: GetStaticPaths =
   async (): Promise<GetStaticPathsResult> => {
+    const data = await getData();
+    const ids = data.products.map((product) => product.id);
+    const pathsWithParams = ids.map((id) => ({ params: { pid: id } }));
+
     return {
-      paths: [
-        { params: { pid: "p1" } },
-        { params: { pid: "p2" } },
-        { params: { pid: "p3" } },
-      ],
-      fallback: false,
+      paths: pathsWithParams,
+      fallback: "blocking",
     };
   };
 
