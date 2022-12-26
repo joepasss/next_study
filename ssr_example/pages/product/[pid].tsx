@@ -8,8 +8,8 @@ import {
 import path from "path";
 import fs from "fs/promises";
 import React, { Fragment } from "react";
-import { DataInterface } from "../interfaces/Data";
-import { ExtractArrayType } from "../interfaces/UtilityType";
+import { DataInterface } from "../../interfaces/Data";
+import { ExtractArrayType } from "../../interfaces/UtilityType";
 
 interface Props {
   loadedProduct: ExtractArrayType<DataInterface["products"]>;

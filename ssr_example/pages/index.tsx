@@ -11,7 +11,7 @@ export default function Home(props: DataInterface) {
     <ul>
       {products.map((product, index) => (
         <li key={`${product.id}_${index}`}>
-          <Link href={`/${product.id}`}>{product.title}</Link>
+          <Link href={`/product/${product.id}`}>{product.title}</Link>
         </li>
       ))}
     </ul>
