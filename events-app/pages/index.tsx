@@ -1,8 +1,7 @@
 import { GetStaticProps, GetStaticPropsResult, NextPage } from "next";
 import React from "react";
 import EventList from "../components/events/EventList";
-import { DummyEventsInterface } from "../dummy-data";
-import { getFeaturedEvents } from "../helpers/api-util";
+import { getFeaturedEvents, DummyEventsInterface } from "../helpers/api-util";
 
 const HomePage: NextPage<{ events: DummyEventsInterface[] }> = (props) => {
   return (

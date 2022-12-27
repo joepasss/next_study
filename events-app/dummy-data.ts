@@ -1,12 +1,4 @@
-export interface DummyEventsInterface {
-  id: string;
-  title: string;
-  location: string;
-  description: string;
-  date: string;
-  image: string;
-  isFeatured: boolean;
-}
+import { DummyEventsInterface } from "./helpers/api-util";
 
 const DUMMY_EVENTS: DummyEventsInterface[] = [
   {
@@ -58,8 +50,4 @@ export function getFilteredEvents(dateFilter: dateFilterType) {
   });
 
   return filteredEvents;
-}
-
-export function getEventById(id: string) {
-  return DUMMY_EVENTS.find((event) => event.id === id);
 }
