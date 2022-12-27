@@ -41,10 +41,6 @@ const DUMMY_EVENTS: DummyEventsInterface[] = [
   },
 ];
 
-export function getFeaturedEvents() {
-  return DUMMY_EVENTS.filter((event) => event.isFeatured);
-}
-
 export function getAllEvents() {
   return DUMMY_EVENTS;
 }
