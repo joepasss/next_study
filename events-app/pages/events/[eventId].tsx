@@ -13,7 +13,11 @@ import {
   EventSummary,
 } from "../../components/event-detail";
 import { getAllEvents } from "../../dummy-data";
-import { DummyEventsInterface, getEventById } from "../../helpers/api-util";
+import {
+  DummyEventsInterface,
+  getEventById,
+  getFeaturedEvents,
+} from "../../helpers/api-util";
 
 const EventDetailPage: NextPage<{ event: DummyEventsInterface }> = ({
   event,
@@ -45,18 +49,19 @@ export const getStaticProps: GetStaticProps = async (
     props: {
       event: event,
     },
+    revalidate: 30,
   };
 };
 
 export const getStaticPaths: GetStaticPaths = async (
   context: GetStaticPropsContext
 ): Promise<GetStaticPathsResult<{}>> => {
-  const events = await getAllEvents();
+  const events = await getFeaturedEvents();
   const paths = events.map((event) => ({ params: { eventId: event.id } }));
 
   return {
     paths,
-    fallback: false,
+    fallback: "blocking",
   };
 };
 
