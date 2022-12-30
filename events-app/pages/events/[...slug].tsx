@@ -1,14 +1,45 @@
-import { useRouter } from "next/router";
+import {
+  GetServerSideProps,
+  GetServerSidePropsContext,
+  GetServerSidePropsResult,
+  NextPage,
+} from "next";
 import React, { Fragment } from "react";
 import EventList from "../../components/events/EventList";
-import { getFilteredEvents } from "../../dummy-data";
+import {
+  DummyEventsInterface,
+  getFilteredEvents,
+} from "../../helpers/api-util";
 
-const FilteredEventsPage = () => {
-  const router = useRouter();
-  const filteredDate = router.query.slug;
+const FilteredEventsPage: NextPage<{
+  filteredEvent: DummyEventsInterface[];
+}> = ({ filteredEvent }) => {
+  return (
+    <Fragment>
+      <EventList items={filteredEvent} />
+    </Fragment>
+  );
+};
+
+export const getServerSideProps: GetServerSideProps = async (
+  context: GetServerSidePropsContext
+): Promise<
+  GetServerSidePropsResult<{ filteredEvent: DummyEventsInterface[] }>
+> => {
+  const { params } = context;
+
+  if (!params) {
+    return {
+      notFound: true,
+    };
+  }
+
+  const filteredDate = params.slug;
 
   if (!filteredDate) {
-    return <p className="center">Loading ...</p>;
+    return {
+      notFound: true,
+    };
   }
 
   const filteredYear = filteredDate[0];
@@ -28,13 +59,13 @@ const FilteredEventsPage = () => {
     return <h1>INVALID FILTER</h1>;
   }
 
-  const filteredEvent = getFilteredEvents({ year: numYear, month: numMonth });
+  const filteredEvent = await getFilteredEvents(numYear, numMonth);
 
-  return (
-    <Fragment>
-      <EventList items={filteredEvent} />
-    </Fragment>
-  );
+  return {
+    props: {
+      filteredEvent,
+    },
+  };
 };
 
 export default FilteredEventsPage;
