@@ -1,6 +1,6 @@
 import { EventsInterface } from "../interfaces";
 
-export const getAllEvents = async () => {
+export const getAllEvents = async (): Promise<EventsInterface[]> => {
   const response = await fetch(
     `https://next-study-e4457-default-rtdb.firebaseio.com/events.json`
   );
@@ -38,4 +38,24 @@ export const getEventById = async (
   }
 
   return undefined;
+};
+
+export const getFilteredEvents = async (
+  year: number,
+  month: number
+): Promise<EventsInterface[] | undefined> => {
+  const events = await getAllEvents();
+  const filteredEvents: EventsInterface[] = events.filter((event) => {
+    const eventDate = new Date(event.date);
+
+    return (
+      eventDate.getFullYear() === year && eventDate.getMonth() === month - 1
+    );
+  });
+
+  if (filteredEvents.length <= 0) {
+    return undefined;
+  }
+
+  return filteredEvents;
 };
