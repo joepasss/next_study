@@ -2,7 +2,8 @@
 import AddressIcon from "../icons/address-icon";
 import DateIcon from "../icons/date-icon";
 import LogisticsItem from "./LogisticsItem";
-import { DummyEventsInterface } from "../../dummy-data";
+import Image from "next/image";
+import { DummyEventsInterface } from "../../helpers/api-util";
 
 interface Props {
   item: DummyEventsInterface;
@@ -22,7 +23,12 @@ function EventLogistics(props: Props) {
   return (
     <section className="event-detail__logistics">
       <div className="event-detail__logistics--image">
-        <img src={`/${image}`} alt={props.imageAlt} />
+        <Image
+          src={`/${image}`}
+          alt={props.imageAlt}
+          width={160}
+          height={160}
+        />
       </div>
       <ul className="event-detail__logistics--list">
         <LogisticsItem icon={<DateIcon />}>

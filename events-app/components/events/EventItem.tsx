@@ -1,7 +1,8 @@
 /* eslint-disable @next/next/no-img-element */
+import Image from "next/image";
 import Link from "next/link";
 import React, { FC } from "react";
-import { DummyEventsInterface } from "../../dummy-data";
+import { DummyEventsInterface } from "../../helpers/api-util";
 import { AddressIcon, ArrowRightIcon, DateIcon } from "../icons";
 import Button from "../ui/Button";
 
@@ -23,8 +24,7 @@ const EventItem: FC<Props> = ({ item }) => {
 
   return (
     <li className="event-item">
-      <img src={"/" + image} alt="items" />
-
+      <Image src={"/" + image} alt={title} width={250} height={160} />
       <div className="event-item__content">
         <div className="event-item__content--summary">
           <h2>{title}</h2>
