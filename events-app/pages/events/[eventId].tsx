@@ -6,6 +6,7 @@ import {
   GetStaticPropsResult,
   NextPage,
 } from "next";
+import Head from "next/head";
 import { Fragment } from "react";
 import {
   EventContent,
@@ -24,6 +25,10 @@ const EventDetailPage: NextPage<{ event: DummyEventsInterface }> = ({
 }) => {
   return (
     <Fragment>
+      <Head>
+        <title>{event.title}</title>
+        <meta name="description" content={event.description} />
+      </Head>
       <EventSummary title={event.title} />
       <EventLogistics item={event} />
       <EventContent>

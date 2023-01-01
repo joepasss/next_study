@@ -4,6 +4,7 @@ import {
   GetServerSidePropsResult,
   NextPage,
 } from "next";
+import Head from "next/head";
 import React, { Fragment } from "react";
 import EventList from "../../components/events/EventList";
 import {
@@ -13,9 +14,15 @@ import {
 
 const FilteredEventsPage: NextPage<{
   filteredEvent: DummyEventsInterface[];
-}> = ({ filteredEvent }) => {
+  year: number;
+  month: number;
+}> = ({ filteredEvent, year, month }) => {
   return (
     <Fragment>
+      <Head>
+        <title>Filtered Events</title>
+        <meta name="description" content={`All events for ${year}/${month}.`} />
+      </Head>
       <EventList items={filteredEvent} />
     </Fragment>
   );
@@ -24,7 +31,11 @@ const FilteredEventsPage: NextPage<{
 export const getServerSideProps: GetServerSideProps = async (
   context: GetServerSidePropsContext
 ): Promise<
-  GetServerSidePropsResult<{ filteredEvent: DummyEventsInterface[] }>
+  GetServerSidePropsResult<{
+    filteredEvent: DummyEventsInterface[];
+    year: number;
+    month: number;
+  }>
 > => {
   const { params } = context;
 
@@ -63,6 +74,8 @@ export const getServerSideProps: GetServerSideProps = async (
 
   return {
     props: {
+      year: numYear,
+      month: numMonth,
       filteredEvent,
     },
   };
